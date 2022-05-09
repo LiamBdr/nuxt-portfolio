@@ -17,6 +17,7 @@
     "webpack": "^4.46.0"
   },
   "devDependencies": {
+    "@nuxtjs/style-resources": "^1.2.1",
     "sass": "^1.51.0",
     "sass-loader": "^10.2.1"
   }
