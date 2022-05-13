@@ -14,12 +14,6 @@
   </div>
 </template>
 
-<style lang="scss">
-main {
-  padding: 20px 10%;
-}
-</style>
-
 <script>
 export default {
   data() {
