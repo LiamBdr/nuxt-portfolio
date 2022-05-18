@@ -1,15 +1,8 @@
 <template>
   <div>
-    <Header 
-        @showMobile="displayMobileMenu"
-    />
-    <MainNav
-      navClass="mobile"
-      :class="{ active: showMobileMenu }"
-    />
-    <main>
-      <Nuxt />
-    </main>
+    <Header @showMobile="displayMobileMenu" />
+    <MainNav navClass="mobile" :class="{ active: showMobileMenu }" />
+    <Nuxt />
     <!-- <Footer /> -->
   </div>
 </template>
@@ -21,9 +14,9 @@ export default {
       showMobileMenu: false,
     };
   },
-   methods: {
+  methods: {
     displayMobileMenu(bool) {
-      this.showMobileMenu = bool
+      this.showMobileMenu = bool;
     },
   },
 };

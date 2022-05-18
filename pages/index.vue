@@ -1,11 +1,14 @@
 <template>
-  <HomeIntro />
+  <main>
+    <HomeIntro />
+    <HomeAbout />
+  </main>
 </template>
 
 <script>
 export default {
   name: "IndexPage",
-   head() {
+  head() {
     return {
       title: "Liam Boudraa | Développeur web",
       meta: [
@@ -18,5 +21,4 @@ export default {
     };
   },
 };
-
 </script>

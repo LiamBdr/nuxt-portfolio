@@ -1,5 +1,5 @@
 <template>
-  <div class="home-intro">
+  <section class="home-intro">
     <div class="text-col">
       <h1 class="home-intro__title">
         Développeur web<br />
@@ -7,18 +7,17 @@
       </h1>
 
       <p class="home-intro__desc">
-        J’ai 19 ans et je suis étudiant à l’Institut universitaire de
-        technologique de Troyes
+        Bonjour je suis Liam Boudraa, étudiant à l’Institut universitaire de
+        technologique de Troyes dans le domaine du web.
       </p>
       <p class="home-intro__desc">
         Je réalise des solutions digitales pour l'ensemble des acteurs du
         numérique :
       </p>
       <ul class="home-intro__list">
-        <li class="home-intro__item">E-commercants</li>
         <li class="home-intro__item">Entreprises</li>
         <li class="home-intro__item">Associations</li>
-        <li class="home-intro__item">Artistes</li>
+        <li class="home-intro__item">Indépendants</li>
       </ul>
     </div>
 
@@ -29,18 +28,17 @@
         background="transparent"
         speed="1"
         loop
-        autoplay
       ></lottie-player>
       <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     </div>
-  </div>
+  </section>
 </template>
 
 <style lang="scss">
 .home-intro {
   position: relative;
   width: 100%;
-  min-height: calc(95vh - 70px);
+  min-height: calc(85vh - 70px);
 
   display: flex;
   align-items: center;
@@ -85,7 +83,7 @@
     position: relative;
     font-size: 1.7rem;
     font-weight: 300;
-    color: #616060;
+    color: $text;
 
     margin-bottom: 1rem;
   }
@@ -136,6 +134,11 @@
     &__list {
       font-size: 1.4rem;
     }
+  }
+
+  .anim-col #home-lottie {
+    width: 80%;
+    margin: 0 auto;
   }
 }
 
