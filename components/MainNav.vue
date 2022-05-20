@@ -1,8 +1,8 @@
 <template>
   <nav class="main-nav" :class="navClass">
     <NuxtLink class="main-nav__link" to="/">Accueil</NuxtLink>
-    <a class="main-nav__link" href="">À propos</a>
-    <a class="main-nav__link" href="">Compétences</a>
+    <a class="main-nav__link" href="#about">À propos</a>
+    <a class="main-nav__link" href="#skills">Compétences</a>
     <a class="main-nav__link" href="">Réalisations</a>
     <a class="main-nav__link" href="">Contact</a>
   </nav>
