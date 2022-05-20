@@ -1,5 +1,5 @@
 <template>
-  <section class="home-intro">
+  <section id="intro" class="home-intro">
     <div class="text-col">
       <h1 class="home-intro__title">
         Développeur web<br />
@@ -61,7 +61,6 @@
     span {
       position: relative;
       color: $tonic;
-      font-size: 600;
       display: inline-block;
 
       &::after {
@@ -81,7 +80,6 @@
   &__desc,
   &__list {
     position: relative;
-    font-size: 1.7rem;
     font-weight: 300;
     color: $text;
 
@@ -117,6 +115,11 @@
       width: 100%;
     }
   }
+
+  .anim-col #home-lottie {
+    width: 80%;
+    margin: 0 auto;
+  }
 }
 
 @media (max-width: 768px) {
@@ -129,16 +132,6 @@
       font-size: $font-size;
       line-height: $font-size + 1.5;
     }
-
-    &__desc,
-    &__list {
-      font-size: 1.4rem;
-    }
-  }
-
-  .anim-col #home-lottie {
-    width: 80%;
-    margin: 0 auto;
   }
 }
 

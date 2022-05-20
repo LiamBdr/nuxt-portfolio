@@ -91,13 +91,13 @@ video {
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 100%;
   font-family: "Poppins", sans-serif;
   vertical-align: baseline;
 }
 
 html {
   font-size: 62.5%;
+  scroll-behavior: smooth;
 }
 
 ::selection {
@@ -119,8 +119,34 @@ main {
   padding: 20px 10%;
 }
 
+p,
+a,
+li {
+  color: $text;
+  font-size: 1.7rem;
+  line-height: 165%;
+}
+
+.title-l {
+  text-align: center;
+  font-size: 4rem;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+
+
 @media (max-width: 768px) {
   main {
     padding: 20px 5%;
+  }
+
+  p,
+  a,
+  li {
+    font-size: 1.4rem;
+  }
+
+  .title-l {
+    font-size: 3rem;
   }
 }
