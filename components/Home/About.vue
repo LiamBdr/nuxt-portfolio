@@ -97,10 +97,6 @@
 </template>
 
 <style lang="scss">
-.home-about {
-  padding: 20px 0;
-}
-
 .about-panel-nav {
   position: relative;
   max-width: 60%;

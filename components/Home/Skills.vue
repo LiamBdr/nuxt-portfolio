@@ -1,6 +1,6 @@
 <template>
   <section id="skills" class="home-skills">
-    <h2 class="title-l">Compétences</h2>
+    <h2 class="title-l">Mes compétences</h2>
     <p class="desc">
       Vous retrouvez, ci-dessous, l'ensemble de mon savoir-faire acquis grâce à
       mon cursus universitaire appliqué à travers mes expériences
@@ -65,10 +65,6 @@
 </template>
 
 <style lang="scss">
-.home-skills {
-  padding: 20px 0;
-}
-
 .desc {
   text-align: center;
   font-weight: 300;
