@@ -3,6 +3,7 @@
     <HomeIntro />
     <HomeAbout />
     <HomeSkills />
+    <HomeWorks />
   </main>
 </template>
 
