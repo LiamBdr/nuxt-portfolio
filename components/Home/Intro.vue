@@ -29,7 +29,6 @@
         speed="1"
         loop
       ></lottie-player>
-      <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     </div>
   </section>
 </template>
