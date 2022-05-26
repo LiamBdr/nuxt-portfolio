@@ -5,44 +5,153 @@
 
 body {
   margin: 0;
+  overflow-x: hidden;
 }
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-    font-family: 'Poppins', sans-serif;
-	vertical-align: baseline;
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: "Poppins", sans-serif;
+  vertical-align: baseline;
 }
 
 html {
-	font-size: 62.5%;
+  font-size: 62.5%;
+  scroll-behavior: smooth;
 }
 
 ::selection {
-    color: white;
-    background-color: $tonic;
+  color: white;
+  background-color: $tonic;
 }
 
 ::-moz-selection {
-	color: white;
-    background-color: $tonic;
+  color: white;
+  background-color: $tonic;
 }
 
 ::-webkit-search-results-decoration {
-	color: white;
-    background-color: $tonic;
+  color: white;
+  background-color: $tonic;
+}
+
+main {
+  padding: 20px 10%;
+}
+
+p,
+a,
+li {
+  color: $text;
+  font-size: 1.7rem;
+  line-height: 165%;
+}
+
+.title-l {
+  text-align: center;
+  font-size: 4rem;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+
+section {
+  padding: 30px 0;
+}
+
+
+@media (max-width: 768px) {
+  main {
+    padding: 20px 5%;
+  }
+
+  p,
+  a,
+  li {
+    font-size: 1.4rem;
+  }
+
+  .title-l {
+    font-size: 3rem;
+  }
 }

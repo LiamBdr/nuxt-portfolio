@@ -1,24 +1,11 @@
 <template>
   <div>
-    <Header 
-        @showMobile="displayMobileMenu"
-    />
-    <MainNav
-      navClass="mobile"
-      :class="{ active: showMobileMenu }"
-    />
-    <main>
-      <Nuxt />
-    </main>
+    <Header @showMobile="displayMobileMenu" />
+    <MainNav navClass="mobile" :class="{ active: showMobileMenu }" />
+    <Nuxt />
     <!-- <Footer /> -->
   </div>
 </template>
-
-<style lang="scss">
-main {
-  padding: 20px 10%;
-}
-</style>
 
 <script>
 export default {
@@ -27,9 +14,9 @@ export default {
       showMobileMenu: false,
     };
   },
-   methods: {
+  methods: {
     displayMobileMenu(bool) {
-      this.showMobileMenu = bool
+      this.showMobileMenu = bool;
     },
   },
 };

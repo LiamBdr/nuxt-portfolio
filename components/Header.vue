@@ -2,7 +2,7 @@
   <header class="main-header">
     <div class="main-header__name">Liam Boudraa<span>.fr</span></div>
 
-    <MainNav/>
+    <MainNav />
 
     <div
       class="kebab-menu"
@@ -52,14 +52,18 @@
       color: $tonic;
     }
   }
+
+  @media (max-width: 768px) {
+    padding: 0 5%;
+  }
 }
 
 //KEBAB MENU
 .kebab-menu {
-  position: absolute;
+  position: relative;
   height: auto;
 
-  right: 10%;
+  right: 0;
   margin: auto 0;
 
   transition: all 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
