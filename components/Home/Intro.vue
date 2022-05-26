@@ -7,11 +7,11 @@
       </h1>
 
       <p class="home-intro__desc">
-        Bonjour je suis Liam Boudraa, étudiant à l’Institut universitaire de
+        Bonjour je suis <strong>Liam Boudraa</strong>, étudiant à l’Institut universitaire de
         technologique de Troyes dans le domaine du web.
       </p>
       <p class="home-intro__desc">
-        Je réalise des solutions digitales pour l'ensemble des acteurs du
+        Je réalise des <strong>solutions digitales</strong> pour l'ensemble des acteurs du
         numérique :
       </p>
       <ul class="home-intro__list">
@@ -83,6 +83,10 @@
     color: $text;
 
     margin-bottom: 1rem;
+
+    strong {
+      font-weight: 500;
+    }
   }
 
   &__list {
