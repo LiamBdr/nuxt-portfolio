@@ -224,7 +224,6 @@
 }
 
 @media (max-width: 768px) {
-
   .about-panel-nav {
     max-width: 100%;
 
@@ -243,17 +242,22 @@
     &__img {
       position: relative;
       margin-top: 15px;
-      width: 70%;
+      width: 50%;
     }
   }
 }
 
 @media (max-width: 425px) {
   .about-panel-nav {
-    
     flex-wrap: wrap;
     a {
-    font-size: 1.6rem;
+      font-size: 1.6rem;
+    }
+  }
+
+  .about-panel {
+    &__img {
+      width: 70%;
     }
   }
 }
