@@ -4,6 +4,7 @@
     <HomeAbout />
     <HomeSkills />
     <HomeWorks />
+    <HomeContact />
   </main>
 </template>
 
