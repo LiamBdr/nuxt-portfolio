@@ -14,7 +14,7 @@
       <p>
         {{ desc }}
       </p>
-      <a class="link" target="_blank" rel="noopener">Visitez le site</a>
+      <a class="link" target="_blank" :href="link" rel="noopener">Visitez le site</a>
     </div>
   </div>
 </template>
