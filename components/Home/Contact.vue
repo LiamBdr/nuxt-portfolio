@@ -18,7 +18,6 @@
               type="text"
               name="name"
               placeholder="Votre prénom"
-              required
             />
           </div>
 
@@ -30,7 +29,6 @@
               type="text"
               name="name"
               placeholder="Votre nom"
-              required
             />
           </div>
         </div>
@@ -42,7 +40,6 @@
           type="email"
           name="email"
           placeholder="Votre email"
-          required
         />
 
         <label for="message">Message</label>
@@ -52,11 +49,33 @@
           placeholder="Votre message"
           name="message"
           rows="5"
-          required
         >
         </textarea>
 
-        <input class="submit-btn" type="submit" value="Envoyer" />
+        <div class="contact-send">
+          <button class="contact-submit" type="submit" value="Envoyer">
+            <span>Envoyer</span>
+            <svg
+              class="contact-loading"
+              width="25"
+              height="25"
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle
+                id="loading-circle"
+                cx="20"
+                cy="20"
+                r="18"
+                stroke="#FFFF"
+                stroke-width="4"
+              />
+            </svg>
+          </button>
+
+          <div class="contact-validation">Votre mail a bien été envoyé</div>
+        </div>
       </form>
 
       <img
@@ -84,7 +103,34 @@ export default {
   mounted() {},
   methods: {
     checkForm() {
-      console.log(this.form.firstname);
+      let submitBtn = document.querySelector(".contact-submit");
+      let validationTxt = document.querySelector(".contact-validation");
+
+      submitBtn.classList.add("loading");
+      // validationTxt.classList.add("valid");
+
+      // let data = {
+      //   title: "test",
+      // };
+      // this.sendForm(data);
+
+      // setTimeout(() => {
+      //   submitBtn.classList.remove("loading");
+      //   validationTxt.classList.remove("valid");
+      // }, 2000);
+    },
+    async sendForm(datas) {
+      console.log(datas);
+
+      const response = await fetch("/formValidate.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(datas),
+      });
+
+      const data = await response.json();
     },
   },
 };
@@ -140,7 +186,7 @@ export default {
     }
   }
 
-  input:not(.submit-btn),
+  input:not(.contact-submit),
   textarea {
     position: relative;
     width: 100%;
@@ -157,30 +203,124 @@ export default {
 
     border: 1px solid rgb(224, 224, 224);
   }
+}
 
-  .submit-btn {
-    position: relative;
-    display: inline-block;
+.contact-send {
+  display: flex;
+  align-items: center;
+}
 
-    width: 140px;
-    padding: 10px;
+.contact-submit {
+  position: relative;
+  display: inline-flex;
 
-    outline: none;
-    border: none;
-    border-radius: 0;
-    background: $tonic;
+  justify-content: center;
+  align-items: center;
 
-    color: white;
-    font-weight: 700;
-    font-size: 1.7rem;
-    font-family: inherit;
+  height: 40px;
+  width: 140px;
+  padding: 10px;
 
-    cursor: pointer;
-    transition: all ease 0.1s;
+  outline: none;
+  border: none;
+  border-radius: 0;
+  background: $tonic;
 
-    &:hover {
-      background: darken($color: $tonic, $amount: 5);
+  color: white;
+  font-weight: 500;
+  font-size: 1.7rem;
+  font-family: inherit;
+
+  cursor: pointer;
+  transition: all ease 0.1s;
+
+  &:hover {
+    background: darken($color: $tonic, $amount: 5);
+  }
+
+  &.loading {
+    span {
+      display: none;
     }
+
+    .contact-loading {
+      display: block;
+    }
+  }
+}
+
+//loading spinner
+$small-stroke: 105;
+$small-stroke-animate: 95;
+$rotate: 25deg;
+$rotate-origin: -32deg;
+
+.contact-loading {
+  display: none;
+
+  height: 100% !important;
+  width: 100% !important;
+
+  margin: 0 auto;
+  animation: loading-spinner-spin 2s linear infinite;
+  will-change: transform;
+
+  #loading-circle {
+    stroke-dasharray: $small-stroke;
+    stroke-dashoffset: $small-stroke;
+    stroke-linecap: round;
+    animation: loading-spinner-small 1.7s cubic-bezier(0.445, 0.05, 0.55, 0.95)
+      infinite;
+    transform-origin: center;
+  }
+}
+
+@keyframes loading-spinner-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loading-spinner-small {
+  0% {
+    stroke-dashoffset: $small-stroke-animate;
+    transform: scaleY(1);
+  }
+  49.99% {
+    stroke-dashoffset: 0;
+    transform: scaleY(1);
+  }
+  50% {
+    stroke-dashoffset: 0;
+    transform: scaleY(-1) rotate($rotate);
+  }
+  100% {
+    stroke-dashoffset: $small-stroke-animate;
+    transform: scaleY(-1) rotate($rotate-origin);
+  }
+}
+
+.contact-validation {
+  position: relative;
+  display: none;
+
+  font-size: 1.7rem;
+  font-weight: 300;
+  line-height: 0;
+
+  margin-left: 20px;
+
+  &.valid {
+    display: inline-block;
+    color: $tonic;
+  }
+
+  &.error {
+    display: inline-block;
+    color: rgb(242, 52, 52);
   }
 }
 
@@ -210,15 +350,19 @@ export default {
     }
 
     label,
-    input:not(.submit-btn),
+    input:not(.contact-submit),
     textarea,
-    .submit-btn {
+    .contact-submit {
       font-size: 1.4rem;
     }
   }
 
   .contact-illu {
     width: 55%;
+  }
+
+  .contact-validation {
+    font-size: 1.4rem;
   }
 }
 
@@ -228,7 +372,7 @@ export default {
       flex-direction: column;
     }
 
-    input:not(.submit-btn),
+    input:not(.contact-submit),
     textarea {
       margin-bottom: 10px;
     }

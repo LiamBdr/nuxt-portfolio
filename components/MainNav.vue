@@ -3,8 +3,8 @@
     <NuxtLink class="main-nav__link" to="/">Accueil</NuxtLink>
     <a class="main-nav__link" href="#about">À propos</a>
     <a class="main-nav__link" href="#skills">Compétences</a>
-    <a class="main-nav__link" href="">Réalisations</a>
-    <a class="main-nav__link" href="">Contact</a>
+    <a class="main-nav__link" href="#works">Réalisations</a>
+    <a class="main-nav__link" href="#contact">Contact</a>
   </nav>
 </template>
 
