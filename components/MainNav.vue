@@ -1,10 +1,40 @@
 <template>
   <nav class="main-nav" :class="navClass">
-    <NuxtLink class="main-nav__link" to="/">Accueil</NuxtLink>
-    <a class="main-nav__link" href="#about">À propos</a>
-    <a class="main-nav__link" href="#skills">Compétences</a>
-    <a class="main-nav__link" href="#works">Réalisations</a>
-    <a class="main-nav__link" href="#contact">Contact</a>
+    <a
+      class="main-nav__link intro"
+      @click="hideMobileNav"
+      :class="activeNav === 'intro' ? 'toggle' : ''"
+      href="#intro"
+      >Accueil</a
+    >
+    <a
+      class="main-nav__link about"
+      @click="hideMobileNav"
+      :class="activeNav === 'about' ? 'toggle' : ''"
+      href="#about"
+      >À propos</a
+    >
+    <a
+      class="main-nav__link skills"
+      @click="hideMobileNav"
+      :class="activeNav === 'skills' ? 'toggle' : ''"
+      href="#skills"
+      >Compétences</a
+    >
+    <a
+      class="main-nav__link works"
+      @click="hideMobileNav"
+      :class="activeNav === 'works' ? 'toggle' : ''"
+      href="#works"
+      >Réalisations</a
+    >
+    <a
+      class="main-nav__link contact"
+      @click="hideMobileNav"
+      :class="activeNav === 'contact' ? 'toggle' : ''"
+      href="#contact"
+      >Contact</a
+    >
   </nav>
 </template>
 
@@ -12,6 +42,63 @@
 export default {
   props: {
     navClass: String,
+  },
+  data() {
+    return {
+      activeNav: "intro",
+    };
+  },
+  methods: {
+    handleScroll() {
+      //intro
+      this.addActiveLinks("intro");
+
+      //about
+      this.addActiveLinks("about");
+
+      //skills
+      this.addActiveLinks("skills");
+
+      //works
+      this.addActiveLinks("works");
+
+      //contact
+      this.addActiveLinks("contact");
+    },
+    addActiveLinks(nav) {
+      let triggerSectionToTop = document
+        .querySelector("#" + nav)
+        .getBoundingClientRect().top;
+
+      let triggerSectionToBottom = document
+        .querySelector("#" + nav)
+        .getBoundingClientRect().bottom;
+
+      if (
+        triggerSectionToTop <= window.innerHeight / 2 &&
+        triggerSectionToBottom >= window.innerHeight / 2
+      ) {
+        this.removeActiveLink();
+        this.activeNav = nav;
+      }
+    },
+    removeActiveLink() {
+      document
+        .querySelector(".main-nav__link." + this.activeNav)
+        .classList.remove("active");
+    },
+    hideMobileNav() {
+      this.$emit("showMobile", false);
+    },
+  },
+  beforeMount() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  mounted() {
+    document.addEventListener("load", this.handleScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleScroll);
   },
 };
 </script>
@@ -32,7 +119,7 @@ export default {
 
     transition: all ease 0.2s;
 
-    &.nuxt-link-active {
+    &.toggle {
       font-weight: 500;
       color: $tonic;
     }

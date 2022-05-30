@@ -1,12 +1,11 @@
 <template>
   <header class="main-header">
     <div class="main-header__name">Liam Boudraa<span>.fr</span></div>
-
     <MainNav />
 
     <div
       class="kebab-menu"
-      :class="{ active: toggleMobileMenu }"
+      :class="{ active: hideMobileMenu }"
       @click="showMobile"
     >
       <div class="circle"></div>
@@ -20,7 +19,7 @@
 
 <style lang="scss">
 .main-header {
-  position: relative;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 150;
@@ -117,6 +116,9 @@
 
 <script>
 export default {
+  props: {
+    hideMobileMenu: Boolean,
+  },
   head() {
     return {
       title: "Liam Boudraa | Développeur web",
@@ -131,14 +133,16 @@ export default {
   },
   data() {
     return {
-      toggleMobileMenu: false,
+      toggleMobileMenu: this.hideMobileMenu,
     };
   },
   methods: {
     showMobile() {
+      //send action to default.vue
       this.toggleMobileMenu = !this.toggleMobileMenu;
+      //send action to default.vue
       this.$emit("showMobile", this.toggleMobileMenu);
     },
-  },
+  }
 };
 </script>
