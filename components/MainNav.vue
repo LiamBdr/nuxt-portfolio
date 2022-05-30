@@ -145,10 +145,10 @@ export default {
 
 .main-nav.mobile {
   position: fixed;
-  top: -120vh;
+  top: 0;
   left: 0;
 
-  height: 100vh;
+  height: 105vh;
   width: 100vw;
   padding-top: 70px;
 
@@ -163,10 +163,12 @@ export default {
   flex-direction: column;
   gap: $space;
 
-  transition: top ease 0.2s;
+  transition: transform ease-in-out 0.3s;
+
+  transform: translateY(-100%);
 
   &.active {
-    top: 0;
+    transform: translateY(0);
   }
 
   .main-nav__link {
