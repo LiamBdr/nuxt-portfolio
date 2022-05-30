@@ -61,21 +61,21 @@
 .kebab-menu {
   position: relative;
   height: auto;
+  padding: 5px;
 
-  right: 0;
-  margin: auto 0;
-
-  transition: all 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 200ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
   cursor: pointer;
 
   display: none;
 
   .circle {
     $size: 6px;
+    $margin: 4px;
+    $padding: 5px;
 
     width: $size;
     height: $size;
-    margin: 4px;
+    margin: $margin;
     background: #312f2f;
     border-radius: 50%;
     transition: all ease 0.2s;
@@ -84,17 +84,17 @@
     &:nth-child(5) {
       position: absolute;
       opacity: 0;
-      top: 50%;
-      left: 50%;
-      margin-top: -3px;
+      top: 0;
+      bottom: 0;
+      margin: auto 0;
     }
 
     &:nth-child(4) {
-      margin-left: -14px;
+      left: calc(($padding + $margin) - ($size + $margin));
     }
 
     &:nth-child(5) {
-      margin-left: 7px;
+      right: calc(($padding + $margin) - ($size + $margin));
     }
   }
 
@@ -143,6 +143,11 @@ export default {
       //send action to default.vue
       this.$emit("showMobile", this.toggleMobileMenu);
     },
-  }
+  },
+  watch: {
+    hideMobileMenu() {
+      this.toggleMobileMenu = this.hideMobileMenu;
+    },
+  },
 };
 </script>
