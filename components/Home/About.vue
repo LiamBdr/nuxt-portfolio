@@ -30,7 +30,7 @@
         </p>
         <p>
           Passionné par l'univers du web depuis plusieurs années, je continue de
-          développer mes compétences avec des technologies d'acutalité.
+          développer mes compétences avec des technologies d'actualité.
         </p>
       </div>
       <img

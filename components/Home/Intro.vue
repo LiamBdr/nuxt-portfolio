@@ -44,6 +44,8 @@
   align-items: center;
   justify-content: center;
 
+  padding-top: 70px;
+
   .text-col {
     position: relative;
     width: 50%;
@@ -112,7 +114,6 @@
 @media (max-width: 1024px) {
   .home-intro {
     flex-direction: column;
-    padding: 20px 0;
 
     .text-col,
     .anim-col {
@@ -128,7 +129,6 @@
 
 @media (max-width: 768px) {
   .home-intro {
-    padding: 10px 0;
 
     &__title {
       $font-size: 4rem;
