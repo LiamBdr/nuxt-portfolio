@@ -7,12 +7,12 @@
       </h1>
 
       <p class="home-intro__desc">
-        Bonjour je suis <strong>Liam Boudraa</strong>, étudiant à l’Institut universitaire de
-        technologique de Troyes dans le domaine du web.
+        Bonjour je suis <strong>Liam Boudraa</strong>, étudiant à l’Institut
+        universitaire de technologique de Troyes dans le domaine du web.
       </p>
       <p class="home-intro__desc">
-        Je réalise des <strong>solutions digitales</strong> pour l'ensemble des acteurs du
-        numérique :
+        Je réalise des <strong>solutions digitales</strong> pour l'ensemble des
+        acteurs du numérique :
       </p>
       <ul class="home-intro__list">
         <li class="home-intro__item">Entreprises</li>
@@ -129,7 +129,6 @@
 
 @media (max-width: 768px) {
   .home-intro {
-
     &__title {
       $font-size: 4rem;
 
@@ -162,6 +161,22 @@ export default {
       typingIndex: -1,
       typingArray: 0,
     };
+  },
+  beforeMount() {
+    var tl = gsap.timeline({scrollTrigger: ".home-intro"});
+    //gsap animation
+    tl.from(".home-intro__desc", {
+      delay:  0.3,
+      duration: 0.7,
+      y: 10,
+      opacity: 0,
+      stagger: 0.2,
+    }).from(".home-intro__item", {
+      duration: 0.7,
+      y: 10,
+      opacity: 0,
+      stagger: 0.2,
+    });
   },
   mounted() {
     this.printingLoop();

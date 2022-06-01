@@ -188,12 +188,18 @@
 <script>
 export default {
   name: "Skills",
-  data() {
-    return {
-      data: "",
-    };
+  beforeMount() {
+    //gsap animation
+    gsap.from(".skills-icons figure", {
+      scrollTrigger: {
+        trigger: ".home-skills",
+      },
+      delay: 0.3,
+      duration: 0.7,
+      y: 10,
+      opacity: 0,
+      stagger: 0.2,
+    });
   },
-  mounted() {},
-  methods: {},
 };
 </script>

@@ -64,12 +64,20 @@
 <script>
 export default {
   name: "Works",
-  data() {
-    return {
-      data: "",
-    };
+  beforeMount() {
+    const worksEls = gsap.utils.toArray(".work-el");
+
+    worksEls.forEach((text, i) => {
+      gsap.from(text, {
+        scrollTrigger: {
+          trigger: text,
+          start: "top 70%",
+        },
+        duration: 0.7,
+        y: 20,
+        opacity: 0,
+      });
+    });
   },
-  mounted() {},
-  methods: {},
 };
 </script>
