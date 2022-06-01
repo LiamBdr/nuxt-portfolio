@@ -111,14 +111,14 @@
   .footer-picto {
     display: inline-flex;
     margin-right: 15px;
-    transition: all ease 0.2s;
+    transition: all ease 0.1s;
 
     img {
       width: 25px;
     }
 
     &:hover {
-      transform: scale(1.1);
+      filter: opacity(0.8);
     }
   }
 
@@ -127,20 +127,10 @@
     text-decoration: none;
     cursor: pointer;
     font-size: 1.5rem;
+    transition: all ease 0.1s;
 
-    &::after {
-      position: absolute;
-      content: "";
-      bottom: 0px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: rgb(224, 224, 224);
-      transition: all ease 0.3s;
-    }
-
-    &:hover::after {
-      width: 100%;
+    &:hover {
+      color: lighten($text, 30%);
     }
   }
 }
@@ -217,6 +207,7 @@
 
     p {
       font-size: 1.4rem;
+      text-align: center;
     }
 
     p:nth-last-child(1) {
@@ -226,15 +217,14 @@
 }
 
 @media (max-width: 425px) {
-   .main-footer {
+  .main-footer {
     margin-top: 0;
     padding: 25px 5% 20px 5%;
   }
 
   .footer-col {
-    
     margin: 10px 0 !important;
-    
+
     &:nth-child(2),
     &:nth-child(3) {
       width: 100%;

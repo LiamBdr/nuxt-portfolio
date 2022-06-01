@@ -92,9 +92,10 @@ export default {
     color: $tonic;
     text-decoration: none;
     margin-top: 10px;
+    transition: all ease 0.1s;
 
     &:hover {
-      text-decoration: underline;
+      color: lighten($tonic, 15%);
     }
   }
 

@@ -84,7 +84,13 @@
           <strong>Stage au sein de l'association DiscTroyes</strong>
           <i>Développeur full-stack</i>
           J'ai effectué une refonte complète du site de l'association des
-          maquettes jusqu'au développement avec mon camarade <a href="https://fabien-curfs.fr/" target="_blank" rel="noopener noreferrer">Fabien</a>.
+          maquettes jusqu'au développement avec mon camarade
+          <a
+            href="https://fabien-curfs.fr/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Fabien</a
+          >.
         </p>
       </div>
       <img
@@ -194,9 +200,10 @@
       position: relative;
       text-decoration: none;
       color: $tonic;
+      transition: all ease 0.1s;
 
       &:hover {
-        text-decoration: underline;
+        color: lighten($tonic, 15%);
       }
     }
 
