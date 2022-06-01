@@ -7,7 +7,7 @@
       :class="{ active: showMobileMenu }"
     />
     <Nuxt />
-    <!-- <Footer /> -->
+    <Footer />
   </div>
 </template>
 
