@@ -124,7 +124,7 @@ export default {
       color: $tonic;
     }
 
-    &:hover:not(.nuxt-link-active) {
+    &:hover:not(.toggle) {
       color: lighten(#272626, 40%);
     }
 
@@ -151,6 +151,7 @@ export default {
   height: 105vh;
   width: 100vw;
   padding-top: 70px;
+  padding-bottom: 4vh;
 
   $space: 30px;
 
@@ -163,12 +164,13 @@ export default {
   flex-direction: column;
   gap: $space;
 
-  transition: transform ease-in-out 0.3s;
+  transition: transform ease-in-out 0.5s;
 
   transform: translateY(-100%);
 
   &.active {
-    transform: translateY(0);
+    transform: translateY(-1vh);
+    box-shadow: 0 5px 30px rgba($color: #000000, $alpha: 0.1);
   }
 
   .main-nav__link {
