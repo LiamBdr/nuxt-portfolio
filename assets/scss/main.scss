@@ -157,3 +157,9 @@ section {
     font-size: 3rem;
   }
 }
+
+@media (max-width: 425px) {
+  .title-l {
+    padding-top: 30px;
+  }
+}

@@ -68,6 +68,8 @@
 .desc {
   text-align: center;
   font-weight: 300;
+  width: 80%;
+  margin-left: 10%;
 }
 
 .skills-icons {
@@ -157,6 +159,11 @@
 }
 
 @media (max-width: 425px) {
+  .desc {
+    width: 100%;
+    margin-left: 0;
+  }
+
   .skills-icons {
     margin-top: 30px;
 

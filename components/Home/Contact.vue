@@ -2,9 +2,8 @@
   <section id="contact" class="home-contact">
     <h2 class="title-l">Prendre contact</h2>
     <p class="desc">
-      Vous retrouvez, ci-dessous, l'ensemble de mon savoir-faire acquis grâce à
-      mon cursus universitaire appliqué à travers mes expériences
-      professionnelles et mes productions personnelles.
+      Contactez-moi via le formulaire ci-dessous pour une idée de projet ou pour
+      toute autre question. Je vous répondrai dans les plus brefs délais.
     </p>
 
     <div class="contact-content">

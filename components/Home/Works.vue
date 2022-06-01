@@ -53,6 +53,13 @@
   </section>
 </template>
 
+<style lang="scss">
+@media (max-width: 425px) {
+  .work-el:nth-last-child(1) {
+    margin-bottom: 0;
+  }
+}
+</style>
 
 <script>
 export default {
