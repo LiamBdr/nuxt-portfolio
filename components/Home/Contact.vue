@@ -7,7 +7,7 @@
     </p>
 
     <div class="contact-content">
-      <form class="contact-form" method="post" @submit.prevent="checkForm">
+      <form class="contact-form" @submit.prevent="checkForm">
         <div class="container">
           <div>
             <label for="firstname">Prénom</label>
@@ -73,7 +73,7 @@
             </svg>
           </button>
 
-          <div class="contact-validation">Votre mail a bien été envoyé</div>
+          <div class="contact-validation"></div>
         </div>
       </form>
 
@@ -99,37 +99,69 @@ export default {
       },
     };
   },
-  mounted() {},
+  computed: {
+    submitBtn: () => {
+      return document.querySelector(".contact-submit");
+    },
+    submitTxt: () => {
+      return document.querySelector(".contact-validation");
+    },
+  },
   methods: {
     checkForm() {
-      let submitBtn = document.querySelector(".contact-submit");
-      let validationTxt = document.querySelector(".contact-validation");
+      this.submitBtn.classList.add("loading");
+      this.submitTxt.classList.remove("error");
+      this.submitTxt.classList.remove("valid");
 
-      submitBtn.classList.add("loading");
-      // validationTxt.classList.add("valid");
+      let data = {
+        firstname: this.form.firstname,
+        lastname: this.form.lastname,
+        email: this.form.email,
+        message: this.form.message,
+      };
 
-      // let data = {
-      //   title: "test",
-      // };
-      // this.sendForm(data);
-
-      // setTimeout(() => {
-      //   submitBtn.classList.remove("loading");
-      //   validationTxt.classList.remove("valid");
-      // }, 2000);
+      this.sendForm(data);
     },
-    async sendForm(datas) {
-      console.log(datas);
 
-      const response = await fetch("/formValidate.php", {
-        method: "POST",
+    async sendForm(data) {
+      const sendUrl = "/mail";
+      const params =
+        "?firstname=" +
+        data.firstname +
+        "&lastname=" +
+        data.lastname +
+        "&email=" +
+        data.email +
+        "&message=" +
+        data.message;
+
+      const response = await fetch(sendUrl + params, {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(datas),
       });
 
-      const data = await response.json();
+      const query = await response.json();
+
+      setTimeout(() => {
+        //error
+        if (query.error) {
+          this.submitBtn.classList.remove("loading");
+          this.submitTxt.classList.add("error");
+          this.submitTxt.innerHTML = query.error;
+        } 
+        //no error
+        else {
+          this.submitBtn.classList.remove("loading");
+          this.submitTxt.classList.add("valid");
+          this.submitTxt.innerHTML = "Votre mail a bien été envoyé !";
+
+          this.form.firstname = "";
+          this.form.lastname = "";
+          this.form.email = "";
+          this.form.message = "";
+        }
+      }, 1000);
     },
   },
 };
@@ -306,9 +338,8 @@ $rotate-origin: -32deg;
   position: relative;
   display: none;
 
-  font-size: 1.7rem;
+  font-size: 1.6rem;
   font-weight: 300;
-  line-height: 0;
 
   margin-left: 20px;
 

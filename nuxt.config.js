@@ -48,6 +48,10 @@ export default {
     '@nuxtjs/style-resources'
   ],
 
+  serverMiddleware: [
+    "~/server-middleware/server.js"
+  ],
+
   styleResources: {
     scss: [
       '~/assets/scss/variables.scss'
