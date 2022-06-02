@@ -18,7 +18,7 @@ export default {
         {
           hid: "description",
           name: "description",
-          content: "Home page description",
+          content: "🖥 Conception de sites internet sur-mesure // page vitrine, boutique e-commerce, site dynamique, landing page. Consultez mon portfolio ici",
         },
       ],
     };

@@ -198,7 +198,7 @@ export default {
       duration: 0.7,
       y: 10,
       opacity: 0,
-      stagger: 0.2,
+      stagger: 0.17,
     });
   },
 };
