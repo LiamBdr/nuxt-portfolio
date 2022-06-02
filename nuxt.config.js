@@ -45,12 +45,24 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    '@nuxtjs/style-resources'
+    '@nuxtjs/style-resources',
+    '@nuxtjs/recaptcha',
+    '@nuxtjs/dotenv'
   ],
 
+  recaptcha: {
+    hideBadge: false, // Hide badge element (v3 & v2 via size=invisible)
+    language: 'fr',   // Recaptcha language (v2)
+    mode: 'base',       // Mode: 'base', 'enterprise'
+    siteKey: process.env.RECAPTCHA_SITE_KEY,
+    version: 2,    // Version
+    size: 'normal'        // Size: 'compact', 'normal', 'invisible' (v2)
+  },
+
   serverMiddleware: [
-    "~/server-middleware/server.js"
+    '~/server-middleware/server.js'
   ],
+
 
   styleResources: {
     scss: [

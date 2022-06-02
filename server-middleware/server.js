@@ -1,12 +1,33 @@
 const nodemailer = require('nodemailer');
+const axios = require('axios');
 const express = require("express");
+const bodyParser = require('body-parser');
 const app = express();
 
-app.get("/mail", function (req, res) {
-    const firstname = String(cleanString(req.query.firstname));
-    const lastname = String(cleanString(req.query.lastname));
-    const email = String(cleanString(req.query.email));
-    const message = String(escapeHtml(req.query.message));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.raw());
+
+app.post("/mail", function (req, res) {
+
+    const firstname = String(cleanString(req.body.firstname));
+    const lastname = String(cleanString(req.body.lastname));
+    const email = String(cleanString(req.body.email));
+    const message = String(escapeHtml(req.body.message));
+    const token = req.body.token;
+
+    if (!token) {
+        res.json({ error: 'Captcha invalide' });
+        return;
+    }
+
+    //verif captcha
+    axios.post(`https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}`).then((answer) => {
+        if (answer.data.success === false) {
+            res.json({ error: 'Captcha invalide' });
+            return
+        }
+    });
 
     if (
         firstname.length === 0 ||
@@ -62,22 +83,29 @@ app.get("/mail", function (req, res) {
     today = dd + '/' + mm + '/' + yyyy + ' à ' + today.getHours() + 'h' + today.getMinutes();
 
     let transporter = nodemailer.createTransport({
-        host: 'mailhog',
-        port: 1025,
+        name: 'liam-boudraa.fr',
+        host: 'ssl0.ovh.net', //mailhog
+        port: 465, //1025
+        secure: true,
+        auth: {
+            user: process.env.MAIL_USERNAME,
+            pass: process.env.MAIL_PASSWORD
+        }
     })
 
     let mail = {
         from: email,
-        to: "test@mailhog.local",
+        to: "contact@liam-boudraa.fr",
         subject: "Mail de contact de " + capitalize(firstname) + " " + capitalize(lastname) + " | " + today,
         html: '<p>' + message + '</p>'
     }
 
     transporter.sendMail(mail, function (err, info) {
         if (err) {
+            console.log(err);
             res.json({ error: 'Erreur lors de l\'envoi du mail :(' })
         } else {
-            res.json({ valid: 'Mail envoyé, je vous répondrai dès que possible' })
+            res.json(true)
         }
     })
 });

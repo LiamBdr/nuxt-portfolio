@@ -7,7 +7,7 @@
     </p>
 
     <div class="contact-content">
-      <form class="contact-form" @submit.prevent="checkForm">
+      <form class="contact-form" @submit.prevent="sendForm">
         <div class="container">
           <div>
             <label for="firstname">Prénom</label>
@@ -50,6 +50,8 @@
           rows="5"
         >
         </textarea>
+
+        <recaptcha />
 
         <div class="contact-send">
           <button class="contact-submit" type="submit" value="Envoyer">
@@ -108,11 +110,13 @@ export default {
     },
   },
   methods: {
-    checkForm() {
+    async sendForm() {
+      //reset all
       this.submitBtn.classList.add("loading");
       this.submitTxt.classList.remove("error");
       this.submitTxt.classList.remove("valid");
 
+      //get all value of the form
       let data = {
         firstname: this.form.firstname,
         lastname: this.form.lastname,
@@ -120,41 +124,47 @@ export default {
         message: this.form.message,
       };
 
-      this.sendForm(data);
-    },
+      //add the client recaptcha token
+      try {
+        const token = await this.$recaptcha.getResponse();
+        data["token"] = token;
+      } catch (error) {
+        this.submitBtn.classList.remove("loading");
+        this.submitTxt.classList.add("error");
+        this.submitTxt.innerHTML = "Veuillez cocher le Google ReCaptcha";
+        await this.$recaptcha.reset();
+        return;
+      }
 
-    async sendForm(data) {
-      const sendUrl = "/mail";
-      const params =
-        "?firstname=" +
-        data.firstname +
-        "&lastname=" +
-        data.lastname +
-        "&email=" +
-        data.email +
-        "&message=" +
-        data.message;
-
-      const response = await fetch(sendUrl + params, {
+      //send form to validation
+      const query = await fetch("/mail", {
         headers: {
+          Accept: "application/json",
           "Content-Type": "application/json",
         },
+        method: "POST",
+        body: JSON.stringify(data),
       });
 
-      const query = await response.json();
+      const response = await query.json();
 
       setTimeout(() => {
         //error
-        if (query.error) {
+        if (response.error) {
           this.submitBtn.classList.remove("loading");
           this.submitTxt.classList.add("error");
-          this.submitTxt.innerHTML = query.error;
-        } 
-        //no error
+          this.submitTxt.innerHTML = response.error;
+        }
+        //success
         else {
           this.submitBtn.classList.remove("loading");
           this.submitTxt.classList.add("valid");
           this.submitTxt.innerHTML = "Votre mail a bien été envoyé !";
+
+          //reset after 2s
+          setTimeout(() => {
+            this.submitTxt.classList.remove("valid");
+          }, 4000);
 
           this.form.firstname = "";
           this.form.lastname = "";
@@ -162,7 +172,12 @@ export default {
           this.form.message = "";
         }
       }, 1000);
+
+      await this.$recaptcha.reset();
     },
+  },
+  beforeDestroy() {
+    this.$recaptcha.destroy();
   },
 };
 </script>
@@ -239,6 +254,7 @@ export default {
 .contact-send {
   display: flex;
   align-items: center;
+  margin-top: 20px;
 }
 
 .contact-submit {
