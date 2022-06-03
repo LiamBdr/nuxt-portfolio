@@ -27,7 +27,7 @@
         src="https://assets3.lottiefiles.com/packages/lf20_pwohahvd.json"
         background="transparent"
         loop
-        :autoplay="autoplay"
+        autoplay
       >
       </lottie-player>
     </div>
@@ -182,7 +182,6 @@ export default {
       paper: "",
       typingIndex: -1,
       typingArray: 0,
-      autoplay: false,
     };
   },
   beforeMount() {
@@ -215,7 +214,6 @@ export default {
   },
   mounted() {
     this.typingLoop();
-    this.autoplay = true;
   },
   methods: {
     typingLoop() {
