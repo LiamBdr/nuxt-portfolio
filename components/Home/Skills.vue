@@ -156,6 +156,11 @@
       }
     }
   }
+
+  .desc {
+    width: 100%;
+    margin-left: 0;
+  }
 }
 
 @media (max-width: 425px) {
@@ -192,13 +197,14 @@ export default {
     //gsap animation
     gsap.from(".skills-icons figure", {
       scrollTrigger: {
-        trigger: ".home-skills",
+        trigger: ".skills-icons",
+        start: "top 70%",
       },
       delay: 0.3,
-      duration: 0.7,
+      duration: 0.4,
       y: 10,
       opacity: 0,
-      stagger: 0.17,
+      stagger: 0.15,
     });
   },
 };

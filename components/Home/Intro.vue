@@ -41,13 +41,16 @@
   min-height: calc(85vh - 70px);
 
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
 
   padding-top: 70px;
 
   .text-col {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: 50%;
   }
 
@@ -79,6 +82,10 @@
     }
   }
 
+  &__desc {
+    opacity: 0;
+  }
+
   &__desc,
   &__list {
     position: relative;
@@ -96,9 +103,13 @@
     list-style-position: inside;
   }
 
-  &__item::marker {
-    color: $tonic;
-    background: $tonic;
+  &__item {
+    opacity: 0;
+
+    &::marker {
+      color: $tonic;
+      background: $tonic;
+    }
   }
 }
 
@@ -122,7 +133,7 @@
   }
 
   .anim-col #home-lottie {
-    width: 80%;
+    width: 60%;
     margin: 0 auto;
   }
 }
@@ -148,6 +159,17 @@
     background: transparent;
   }
 }
+
+@media (max-width: 425px) {
+  .home-intro {
+    &__title {
+      $font-size: 3rem;
+
+      font-size: $font-size;
+      line-height: $font-size + 1;
+    }
+  }
+}
 </style>
 
 
@@ -163,31 +185,43 @@ export default {
     };
   },
   beforeMount() {
-    var tl = gsap.timeline({scrollTrigger: ".home-intro"});
+    var tl = gsap.timeline({ scrollTrigger: ".home-intro" });
     //gsap animation
-    tl.from(".home-intro__desc", {
-      delay:  0.3,
-      duration: 0.7,
-      y: 10,
-      opacity: 0,
-      stagger: 0.2,
-    }).from(".home-intro__item", {
-      duration: 0.7,
-      y: 10,
-      opacity: 0,
-      stagger: 0.2,
-    });
+    tl.fromTo(
+      ".home-intro__desc",
+      {
+        y: 10,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        stagger: 0.2,
+        delay: 0.3,
+        duration: 0.4,
+      }
+    ).fromTo(
+      ".home-intro__item",
+      {
+        y: 10,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        stagger: 0.2,
+        duration: 0.4,
+      }
+    );
   },
   mounted() {
-    this.printingLoop();
+    this.typingLoop();
   },
   methods: {
-    printingLoop() {
+    typingLoop() {
       setTimeout(() => {
         this.typingIndex++;
         // index of letter
         const x = this.typingIndex % this.typedText[this.typingArray].length;
-        // printing letter
+        // typing letter
         this.paper += this.typedText[this.typingArray][x];
 
         if (this.paper.length === this.typedText[this.typingArray].length) {
@@ -196,7 +230,7 @@ export default {
             this.deleteLoop();
           }, 1500);
         } else {
-          this.printingLoop();
+          this.typingLoop();
         }
       }, Math.random() * (400 - 100) + 100);
     },
@@ -212,7 +246,7 @@ export default {
             ? this.typingArray++
             : (this.typingArray = 0);
           this.typingIndex = -1;
-          this.printingLoop();
+          this.typingLoop();
         }
       }, 100);
     },

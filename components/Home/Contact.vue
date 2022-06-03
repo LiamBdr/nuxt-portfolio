@@ -111,7 +111,7 @@ export default {
   },
   methods: {
     async sendForm() {
-      //reset all
+      //reset submit
       this.submitBtn.classList.add("loading");
       this.submitTxt.classList.remove("error");
       this.submitTxt.classList.remove("valid");
@@ -124,11 +124,12 @@ export default {
         message: this.form.message,
       };
 
-      //add the client recaptcha token
+      //add the recaptcha client token
       try {
         const token = await this.$recaptcha.getResponse();
         data["token"] = token;
       } catch (error) {
+        //can't get the recaptcha client token
         this.submitBtn.classList.remove("loading");
         this.submitTxt.classList.add("error");
         this.submitTxt.innerHTML = "Veuillez cocher le Google ReCaptcha";
@@ -149,13 +150,13 @@ export default {
       const response = await query.json();
 
       setTimeout(() => {
-        //error
+        //validation error
         if (response.error) {
           this.submitBtn.classList.remove("loading");
           this.submitTxt.classList.add("error");
           this.submitTxt.innerHTML = response.error;
         }
-        //success
+        //validation success
         else {
           this.submitBtn.classList.remove("loading");
           this.submitTxt.classList.add("valid");
@@ -166,6 +167,7 @@ export default {
             this.submitTxt.classList.remove("valid");
           }, 4000);
 
+          //reset form infos
           this.form.firstname = "";
           this.form.lastname = "";
           this.form.email = "";
@@ -404,7 +406,8 @@ $rotate-origin: -32deg;
   }
 
   .contact-illu {
-    width: 55%;
+    height: 250px;
+    width: auto;
   }
 
   .contact-validation {

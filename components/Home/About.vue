@@ -289,22 +289,67 @@ export default {
       age: new Date().getFullYear() - 2003,
     };
   },
-  mounted() {},
+  beforeMount() {
+    //image animation on scroll
+    gsap.from(".presentation img", {
+      scrollTrigger: {
+        trigger: ".about-panel-nav",
+        start: "top 50%",
+      },
+      duration: 0.4,
+      y: 10,
+      opacity: 0,
+    });
+    //text animation on scroll
+    gsap.from(".presentation p", {
+      scrollTrigger: {
+        trigger: ".about-panel-nav",
+        start: "top 50%",
+      },
+      delay: 0.2,
+      duration: 0.4,
+      y: 10,
+      opacity: 0,
+      stagger: 0.2,
+    });
+  },
   methods: {
     panelDisplay(nav) {
+      //can't click on activ nav
+      if (nav === this.panelActive) {
+        return;
+      }
+      //remove active nav
       document
         .querySelector(".about-panel-nav ." + this.panelActive + "")
         .classList.remove("active");
+      //remove active panel
       document
         .querySelector(".about-panel." + this.panelActive + "")
         .classList.add("hidden");
       this.panelActive = nav;
+      //add active nav
       document
         .querySelector(".about-panel-nav ." + this.panelActive + "")
         .classList.add("active");
+      //add active panel
       document
         .querySelector(".about-panel." + this.panelActive + "")
         .classList.remove("hidden");
+      //image animation
+      gsap.from(`.${nav} img`, {
+        duration: 0.4,
+        y: 10,
+        opacity: 0,
+      });
+      //text animation
+      gsap.from(`.${nav} p, .${nav} .separator `, {
+        delay: 0.2,
+        duration: 0.4,
+        y: 10,
+        opacity: 0,
+        stagger: 0.2,
+      });
     },
   },
 };

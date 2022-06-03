@@ -142,6 +142,16 @@ export default {
       this.toggleMobileMenu = !this.toggleMobileMenu;
       //send action to default.vue
       this.$emit("showMobile", this.toggleMobileMenu);
+
+      if (this.toggleMobileMenu === true) {
+        gsap.from(".main-nav.mobile a", {
+          delay: 0.3,
+          duration: 0.2,
+          y: 5,
+          opacity: 0,
+          stagger: 0.1,
+        });
+      }
     },
   },
   watch: {

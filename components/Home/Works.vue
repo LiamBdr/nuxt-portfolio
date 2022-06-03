@@ -67,6 +67,7 @@ export default {
   beforeMount() {
     const worksEls = gsap.utils.toArray(".work-el");
 
+    //loop to anime each works element
     worksEls.forEach((text, i) => {
       gsap.from(text, {
         scrollTrigger: {

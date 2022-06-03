@@ -164,7 +164,7 @@ export default {
   flex-direction: column;
   gap: $space;
 
-  transition: transform ease-in-out 0.5s;
+  transition: transform ease-in-out 0.3s;
 
   transform: translateY(-100%);
 

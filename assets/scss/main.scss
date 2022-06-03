@@ -156,6 +156,10 @@ section {
   .title-l {
     font-size: 3rem;
   }
+
+  section:not(.home-intro) {
+    margin-top: -50px;
+  }
 }
 
 @media (max-width: 425px) {
