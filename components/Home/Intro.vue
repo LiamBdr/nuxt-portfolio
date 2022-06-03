@@ -26,10 +26,10 @@
         id="home-lottie"
         src="https://assets3.lottiefiles.com/packages/lf20_pwohahvd.json"
         background="transparent"
-        speed="1"
         loop
-        autoplay
-      ></lottie-player>
+        :autoplay="autoplay"
+      >
+      </lottie-player>
     </div>
   </section>
 </template>
@@ -182,6 +182,7 @@ export default {
       paper: "",
       typingIndex: -1,
       typingArray: 0,
+      autoplay: false,
     };
   },
   beforeMount() {
@@ -196,8 +197,8 @@ export default {
         y: 0,
         opacity: 1,
         stagger: 0.2,
-        delay: 0.3,
-        duration: 0.4,
+        delay: 0.5,
+        duration: 0.3,
       }
     ).fromTo(
       ".home-intro__item",
@@ -208,12 +209,13 @@ export default {
         y: 0,
         opacity: 1,
         stagger: 0.2,
-        duration: 0.4,
+        duration: 0.3,
       }
     );
   },
   mounted() {
     this.typingLoop();
+    this.autoplay = true;
   },
   methods: {
     typingLoop() {

@@ -345,10 +345,10 @@ export default {
       //text animation
       gsap.from(`.${nav} p, .${nav} .separator `, {
         delay: 0.2,
-        duration: 0.4,
+        duration: 0.3,
         y: 10,
         opacity: 0,
-        stagger: 0.2,
+        stagger: 0.1,
       });
     },
   },
