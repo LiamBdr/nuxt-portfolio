@@ -136,6 +136,10 @@ export default {
       left: calc(100% + 0.9em);
       background: rgb(224, 224, 224);
     }
+
+    @media (max-width: 1024px) {
+      margin-left: 0;
+    }
   }
 
   @media (max-width: 1024px) {
