@@ -119,18 +119,6 @@ export default {
   props: {
     hideMobileMenu: Boolean,
   },
-  head() {
-    return {
-      title: "Liam Boudraa | Développeur web",
-      meta: [
-        {
-          hid: "description",
-          name: "description",
-          content: "Home page description",
-        },
-      ],
-    };
-  },
   data() {
     return {
       toggleMobileMenu: this.hideMobileMenu,
