@@ -3,7 +3,7 @@
     <h2 class="title-l">Mes réalisations</h2>
 
     <WorkEl
-      image="barter.png"
+      image="barter.jpg"
       imgAlt="BarterJailer"
       date="Avril 2022"
       title="Site de jeu pour le projet de fin de DUT"

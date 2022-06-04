@@ -307,7 +307,7 @@ export default {
         start: "top 50%",
       },
       delay: 0.2,
-      duration: 0.4,
+      duration: 0.3,
       y: 10,
       opacity: 0,
       stagger: 0.2,
