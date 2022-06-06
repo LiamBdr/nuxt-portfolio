@@ -38,7 +38,7 @@
       date="Novembre 2021"
       title="Ancien portfolio personnel"
       desc="Conception de mon ancien site personnel avec l'ensemble de mes travaux"
-      link="/old"
+      link="https://liam-boudraa.fr/portfolio-v1"
     />
 
     <WorkEl
