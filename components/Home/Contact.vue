@@ -22,7 +22,6 @@
               type="text"
               name="firstname"
               placeholder="Votre prénom"
-              required
             />
           </div>
 
@@ -33,7 +32,6 @@
               type="text"
               name="lastname"
               placeholder="Votre nom"
-              required
             />
           </div>
         </div>
@@ -44,7 +42,6 @@
           type="email"
           name="email"
           placeholder="Votre email"
-          required
         />
 
         <label for="message">Message</label>
@@ -53,7 +50,6 @@
           placeholder="Votre message"
           name="message"
           rows="5"
-          required
         >
         </textarea>
 
