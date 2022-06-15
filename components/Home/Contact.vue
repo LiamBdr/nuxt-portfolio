@@ -7,7 +7,12 @@
     </p>
 
     <div class="contact-content">
-      <form class="contact-form" @submit.prevent="sendForm">
+      <form
+        name="contact-form"
+        class="contact-form"
+        data-netlify="true"
+        @submit.prevent="sendForm"
+      >
         <div class="container">
           <div>
             <label for="firstname">Prénom</label>
@@ -110,6 +115,13 @@ export default {
     },
   },
   methods: {
+    encode(data) {
+      return Object.keys(data)
+        .map(
+          (key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
+        )
+        .join("&");
+    },
     async sendForm() {
       //reset submit
       this.submitBtn.classList.add("loading");
@@ -138,42 +150,47 @@ export default {
       }
 
       //send form to validation
-      const query = await fetch("/mail", {
+      const query = await fetch("/", {
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json",
+          "Content-Type": "application/x-www-form-urlencoded",
         },
         method: "POST",
-        body: JSON.stringify(data),
+        body: this.encode({
+          "form-name": "contact-form",
+          ...data,
+        }),
       });
 
       const response = await query.json();
 
-      setTimeout(() => {
-        //validation error
-        if (response.error) {
-          this.submitBtn.classList.remove("loading");
-          this.submitTxt.classList.add("error");
-          this.submitTxt.innerHTML = response.error;
-        }
-        //validation success
-        else {
-          this.submitBtn.classList.remove("loading");
-          this.submitTxt.classList.add("valid");
-          this.submitTxt.innerHTML = "Votre mail a bien été envoyé !";
+      console.warn(response);
 
-          //reset after 2s
-          setTimeout(() => {
-            this.submitTxt.classList.remove("valid");
-          }, 4000);
+      // setTimeout(() => {
+      //   //validation error
+      //   if (response.error) {
+      //     this.submitBtn.classList.remove("loading");
+      //     this.submitTxt.classList.add("error");
+      //     this.submitTxt.innerHTML = response.error;
+      //   }
+      //   //validation success
+      //   else {
+      //     this.submitBtn.classList.remove("loading");
+      //     this.submitTxt.classList.add("valid");
+      //     this.submitTxt.innerHTML = "Votre mail a bien été envoyé !";
 
-          //reset form infos
-          this.form.firstname = "";
-          this.form.lastname = "";
-          this.form.email = "";
-          this.form.message = "";
-        }
-      }, 1000);
+      //     //reset after 2s
+      //     setTimeout(() => {
+      //       this.submitTxt.classList.remove("valid");
+      //     }, 4000);
+
+      //     //reset form infos
+      //     this.form.firstname = "";
+      //     this.form.lastname = "";
+      //     this.form.email = "";
+      //     this.form.message = "";
+      //   }
+      // }, 1000);
 
       await this.$recaptcha.reset();
     },
