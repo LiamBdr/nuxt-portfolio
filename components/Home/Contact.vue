@@ -23,6 +23,7 @@
               type="text"
               name="firstname"
               placeholder="Votre prénom"
+              required
             />
           </div>
 
@@ -34,6 +35,7 @@
               type="text"
               name="lastname"
               placeholder="Votre nom"
+              required
             />
           </div>
         </div>
@@ -45,6 +47,7 @@
           type="email"
           name="email"
           placeholder="Votre email"
+          required
         />
 
         <label for="message">Message</label>
@@ -54,6 +57,7 @@
           placeholder="Votre message"
           name="message"
           rows="5"
+          required
         >
         </textarea>
 
@@ -131,34 +135,6 @@ export default {
       this.submitTxt.classList.remove("error");
       this.submitTxt.classList.remove("valid");
 
-      //get all value of the form
-      let formData = {
-        'firstname': this.form.firstname,
-        'lastname': this.form.lastname,
-        'email': this.form.email,
-        'message': this.form.message,
-        'g-recaptcha-response': event.target['g-recaptcha-response'].value
-      };
-
-      console.warn(
-        this.encode({
-          "form-name": "contact-form",
-          ...formData,
-        })
-      );
-
-      // //add the recaptcha client token
-      // try {
-      //   //fetch token recaptcha
-      // } catch (error) {
-      //   //can't get the recaptcha client token
-      //   this.submitBtn.classList.remove("loading");
-      //   this.submitTxt.classList.add("error");
-      //   this.submitTxt.innerHTML = "Veuillez cocher le Google ReCaptcha";
-      //   await this.$recaptcha.reset();
-      //   return;
-      // }
-
       //send form to validation
       const query = await fetch("/", {
         headers: {
@@ -167,13 +143,13 @@ export default {
         },
         method: "POST",
         body: this.encode({
-          "form-name": "contact-form",
-          ...formData,
+          "form-name": "contactForm",
+          ...this.form,
+          "g-recaptcha-response": event.target["g-recaptcha-response"].value,
         }),
       });
 
       const response = await query.json();
-
       console.warn(response);
 
       // setTimeout(() => {
