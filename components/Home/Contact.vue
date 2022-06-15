@@ -11,6 +11,7 @@
         name="contact-form"
         class="contact-form"
         data-netlify="true"
+        data-netlify-recaptcha="true"
         @submit.prevent="sendForm"
       >
         <div class="container">
@@ -20,7 +21,7 @@
               id="firstname"
               v-model="form.firstname"
               type="text"
-              name="name"
+              name="firstname"
               placeholder="Votre prénom"
             />
           </div>
@@ -31,7 +32,7 @@
               id="lastname"
               v-model="form.lastname"
               type="text"
-              name="name"
+              name="lastname"
               placeholder="Votre nom"
             />
           </div>
@@ -139,7 +140,7 @@ export default {
       //add the recaptcha client token
       try {
         const token = await this.$recaptcha.getResponse();
-        data["token"] = token;
+        data["g-recaptcha-response"] = token;
       } catch (error) {
         //can't get the recaptcha client token
         this.submitBtn.classList.remove("loading");
@@ -148,6 +149,13 @@ export default {
         await this.$recaptcha.reset();
         return;
       }
+
+      console.log(
+        this.encode({
+          "form-name": "contact-form",
+          ...data,
+        })
+      );
 
       //send form to validation
       const query = await fetch("/", {

@@ -9,20 +9,20 @@ app.use(bodyParser.json());
 app.use(bodyParser.raw());
 
 app.post("/mail", function (req, res) {
-
-    const firstname = String(cleanString(req.body.firstname));
-    const lastname = String(cleanString(req.body.lastname));
-    const email = String(cleanString(req.body.email));
-    const message = String(escapeHtml(req.body.message));
+    const firstname = cleanString(req.body.firstname);
+    const lastname = cleanString(req.body.lastname);
+    const email = cleanString(req.body.email);
+    const message = escapeHtml(req.body.message);
     const token = req.body.token;
 
+    //no captcha in post request
     if (!token) {
         res.json({ error: 'Captcha invalide' });
         return;
     }
 
-    //verif captcha
-    axios.post(`https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}`).then((answer) => {
+    //verif captcha request
+    axios.post(`https://www.google.com/recaptcha/api/siteverify?secret=${process.env.SITE_RECAPTCHA_SECRET}&response=${token}`).then((answer) => {
         if (answer.data.success === false) {
             res.json({ error: 'Captcha invalide' });
             return
