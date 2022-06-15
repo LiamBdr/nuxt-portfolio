@@ -144,8 +144,8 @@ export default {
         method: "POST",
         body: this.encode({
           "form-name": "contactForm",
-          ...this.form,
           "g-recaptcha-response": event.target["g-recaptcha-response"].value,
+          ...this.form,
         }),
       });
 
