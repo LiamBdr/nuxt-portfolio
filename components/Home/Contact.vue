@@ -19,7 +19,6 @@
             <label for="firstname">Prénom</label>
             <input
               id="firstname"
-              v-model="form.firstname"
               type="text"
               name="firstname"
               placeholder="Votre prénom"
@@ -31,7 +30,6 @@
             <label for="lastname">Nom</label>
             <input
               id="lastname"
-              v-model="form.lastname"
               type="text"
               name="lastname"
               placeholder="Votre nom"
@@ -43,7 +41,6 @@
         <label for="email">Email</label>
         <input
           id="email"
-          v-model="form.email"
           type="email"
           name="email"
           placeholder="Votre email"
@@ -53,7 +50,6 @@
         <label for="message">Message</label>
         <textarea
           id="message"
-          v-model="form.message"
           placeholder="Votre message"
           name="message"
           rows="5"
@@ -103,16 +99,6 @@
 <script>
 export default {
   name: "Contact",
-  data() {
-    return {
-      form: {
-        firstname: "",
-        lastname: "",
-        email: "",
-        message: "",
-      },
-    };
-  },
   computed: {
     submitBtn: () => {
       return document.querySelector(".contact-submit");
@@ -148,9 +134,6 @@ export default {
           ...this.form,
         }),
       });
-
-      const response = await query.json();
-      console.warn(response);
 
       // setTimeout(() => {
       //   //validation error
