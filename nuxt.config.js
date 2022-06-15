@@ -22,7 +22,8 @@ export default {
       { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css' }
     ],
     script: [
-      { src: 'https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js' }
+      { src: 'https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js' },
+      { src: 'https://www.google.com/recaptcha/api.js', async: true, defer: true}
     ]
   },
 
@@ -45,23 +46,12 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/style-resources',
-    '@nuxtjs/recaptcha',
     '@nuxtjs/dotenv'
   ],
-
-  recaptcha: {
-    hideBadge: false, // Hide badge element (v3 & v2 via size=invisible)
-    language: 'fr',   // Recaptcha language (v2)
-    mode: 'base',       // Mode: 'base', 'enterprise'
-    siteKey: process.env.SITE_RECAPTCHA_KEY,
-    version: 2,    // Version
-    size: 'normal'        // Size: 'compact', 'normal', 'invisible' (v2)
-  },
 
   serverMiddleware: [
     '~/server-middleware/server.js'
   ],
-
 
   styleResources: {
     scss: [

@@ -57,7 +57,10 @@
         >
         </textarea>
 
-        <recaptcha />
+        <div
+          class="g-recaptcha"
+          data-sitekey="6LcXcTsgAAAAAAOfqb02B_4MLjwTDb8lfr2ydPqW"
+        ></div>
 
         <div class="contact-send">
           <button class="contact-submit" type="submit" value="Envoyer">
@@ -80,7 +83,6 @@
               />
             </svg>
           </button>
-
           <div class="contact-validation"></div>
         </div>
       </form>
@@ -123,39 +125,39 @@ export default {
         )
         .join("&");
     },
-    async sendForm() {
+    async sendForm(event) {
       //reset submit
       this.submitBtn.classList.add("loading");
       this.submitTxt.classList.remove("error");
       this.submitTxt.classList.remove("valid");
 
       //get all value of the form
-      let data = {
-        firstname: this.form.firstname,
-        lastname: this.form.lastname,
-        email: this.form.email,
-        message: this.form.message,
+      let formData = {
+        'firstname': this.form.firstname,
+        'lastname': this.form.lastname,
+        'email': this.form.email,
+        'message': this.form.message,
+        'g-recaptcha-response': event.target['g-recaptcha-response'].value
       };
 
-      //add the recaptcha client token
-      try {
-        const token = await this.$recaptcha.getResponse();
-        data["g-recaptcha-response"] = token;
-      } catch (error) {
-        //can't get the recaptcha client token
-        this.submitBtn.classList.remove("loading");
-        this.submitTxt.classList.add("error");
-        this.submitTxt.innerHTML = "Veuillez cocher le Google ReCaptcha";
-        await this.$recaptcha.reset();
-        return;
-      }
-
-      console.log(
+      console.warn(
         this.encode({
           "form-name": "contact-form",
-          ...data,
+          ...formData,
         })
       );
+
+      // //add the recaptcha client token
+      // try {
+      //   //fetch token recaptcha
+      // } catch (error) {
+      //   //can't get the recaptcha client token
+      //   this.submitBtn.classList.remove("loading");
+      //   this.submitTxt.classList.add("error");
+      //   this.submitTxt.innerHTML = "Veuillez cocher le Google ReCaptcha";
+      //   await this.$recaptcha.reset();
+      //   return;
+      // }
 
       //send form to validation
       const query = await fetch("/", {
@@ -166,7 +168,7 @@ export default {
         method: "POST",
         body: this.encode({
           "form-name": "contact-form",
-          ...data,
+          ...formData,
         }),
       });
 
@@ -199,12 +201,7 @@ export default {
       //     this.form.message = "";
       //   }
       // }, 1000);
-
-      await this.$recaptcha.reset();
     },
-  },
-  beforeDestroy() {
-    this.$recaptcha.destroy();
   },
 };
 </script>
