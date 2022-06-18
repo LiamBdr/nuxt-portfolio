@@ -37,12 +37,7 @@
         </div>
 
         <label for="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          name="email"
-          placeholder="Votre email"
-        />
+        <input id="email" type="email" name="email" placeholder="Votre email" />
 
         <label for="message">Message</label>
         <textarea
@@ -97,14 +92,6 @@
 <script>
 export default {
   name: "Contact",
-  // computed: {
-  //   submitBtn: () => {
-  //     return document.querySelector(".contact-submit");
-  //   },
-  //   submitTxt: () => {
-  //     return document.querySelector(".contact-validation");
-  //   },
-  // },
   methods: {
     encode(data) {
       return Object.keys(data)
@@ -113,51 +100,20 @@ export default {
         )
         .join("&");
     },
-    async sendForm(event) {
-      //reset submit
-      // this.submitBtn.classList.add("loading");
-      // this.submitTxt.classList.remove("error");
-      // this.submitTxt.classList.remove("valid");
-
-      //send form to validation
-      const query = await fetch("/", {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
+    sendForm(event) {
+      console.log("sending form");
+      
+      fetch("/", {
         method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: this.encode({
           "form-name": "contactForm",
           "g-recaptcha-response": event.target["g-recaptcha-response"].value,
           ...this.form,
         }),
-      });
-
-      // setTimeout(() => {
-      //   //validation error
-      //   if (response.error) {
-      //     this.submitBtn.classList.remove("loading");
-      //     this.submitTxt.classList.add("error");
-      //     this.submitTxt.innerHTML = response.error;
-      //   }
-      //   //validation success
-      //   else {
-      //     this.submitBtn.classList.remove("loading");
-      //     this.submitTxt.classList.add("valid");
-      //     this.submitTxt.innerHTML = "Votre mail a bien été envoyé !";
-
-      //     //reset after 2s
-      //     setTimeout(() => {
-      //       this.submitTxt.classList.remove("valid");
-      //     }, 4000);
-
-      //     //reset form infos
-      //     this.form.firstname = "";
-      //     this.form.lastname = "";
-      //     this.form.email = "";
-      //     this.form.message = "";
-      //   }
-      // }, 1000);
+      })
+        .then(() => console.log("form sent"))
+        .catch((error) => alert(error));
     },
   },
 };
