@@ -11,7 +11,6 @@
         name="contact-form"
         class="contact-form"
         data-netlify="true"
-        data-netlify-recaptcha="true"
         @submit.prevent="sendForm"
       >
         <div class="container">
@@ -59,10 +58,10 @@
 
         <input type="hidden" name="form-name" value="contact-form" />
 
-        <div
+        <!-- <div
           class="g-recaptcha"
           data-sitekey="6LcXcTsgAAAAAAOfqb02B_4MLjwTDb8lfr2ydPqW"
-        ></div>
+        ></div> -->
 
         <div class="contact-send">
           <button class="contact-submit" type="submit" value="Envoyer">
@@ -125,7 +124,6 @@ export default {
       console.warn(
         this.encode({
           "form-name": "contact-form",
-          "g-recaptcha-response": event.target["g-recaptcha-response"].value,
           ...this.form,
         })
       );
@@ -134,7 +132,7 @@ export default {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: this.encode({
-          "g-recaptcha-response": event.target["g-recaptcha-response"].value,
+          "form-name": "contact-form",
           ...this.form,
         }),
       })
