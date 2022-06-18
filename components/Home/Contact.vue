@@ -32,7 +32,7 @@
               type="text"
               name="lastname"
               placeholder="Votre nom"
-              v-model="form.lastlame"
+              v-model="form.lastname"
             />
           </div>
         </div>
