@@ -21,7 +21,7 @@
               type="text"
               name="firstname"
               placeholder="Votre prénom"
-              v-model="form.firstName"
+              v-model="form.firstname"
             />
           </div>
 
@@ -32,7 +32,7 @@
               type="text"
               name="lastname"
               placeholder="Votre nom"
-              v-model="form.lastName"
+              v-model="form.lastlame"
             />
           </div>
         </div>
@@ -103,8 +103,8 @@ export default {
   data() {
     return {
       form: {
-        firstName: "",
-        lastName: "",
+        firstname: "",
+        lastname: "",
         email: "",
         message: "",
       },
@@ -123,7 +123,6 @@ export default {
 
       console.warn(
         this.encode({
-          "form-name": "contact-form",
           ...this.form,
         })
       );
@@ -132,7 +131,7 @@ export default {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: this.encode({
-          "form-name": "contact-form",
+          'form-name': 'contact-form',
           ...this.form,
         }),
       })
