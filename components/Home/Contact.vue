@@ -22,6 +22,7 @@
               type="text"
               name="firstname"
               placeholder="Votre prénom"
+              v-model="form.firstName"
             />
           </div>
 
@@ -32,12 +33,19 @@
               type="text"
               name="lastname"
               placeholder="Votre nom"
+              v-model="form.lastName"
             />
           </div>
         </div>
 
         <label for="email">Email</label>
-        <input id="email" type="email" name="email" placeholder="Votre email" />
+        <input
+          id="email"
+          type="email"
+          name="email"
+          placeholder="Votre email"
+          v-model="form.email"
+        />
 
         <label for="message">Message</label>
         <textarea
@@ -45,6 +53,7 @@
           placeholder="Votre message"
           name="message"
           rows="5"
+          v-model="form.message"
         >
         </textarea>
 
@@ -92,6 +101,16 @@
 <script>
 export default {
   name: "Contact",
+  data() {
+    return {
+      form: {
+        firstName: "",
+        lastName: "",
+        email: "",
+        message: "",
+      },
+    };
+  },
   methods: {
     encode(data) {
       return Object.keys(data)
@@ -102,12 +121,19 @@ export default {
     },
     sendForm(event) {
       console.log("sending form");
-      
+
+      console.warn(
+        this.encode({
+          "form-name": "contact-form",
+          "g-recaptcha-response": event.target["g-recaptcha-response"].value,
+          ...this.form,
+        })
+      );
+
       fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: this.encode({
-          "form-name": "contactForm",
           "g-recaptcha-response": event.target["g-recaptcha-response"].value,
           ...this.form,
         }),
