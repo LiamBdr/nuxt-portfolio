@@ -53,6 +53,8 @@
         >
         </textarea>
 
+        <input type="hidden" name="form-name" value="contact-form" />
+
         <div
           class="g-recaptcha"
           data-sitekey="6LcXcTsgAAAAAAOfqb02B_4MLjwTDb8lfr2ydPqW"
@@ -95,14 +97,14 @@
 <script>
 export default {
   name: "Contact",
-  computed: {
-    submitBtn: () => {
-      return document.querySelector(".contact-submit");
-    },
-    submitTxt: () => {
-      return document.querySelector(".contact-validation");
-    },
-  },
+  // computed: {
+  //   submitBtn: () => {
+  //     return document.querySelector(".contact-submit");
+  //   },
+  //   submitTxt: () => {
+  //     return document.querySelector(".contact-validation");
+  //   },
+  // },
   methods: {
     encode(data) {
       return Object.keys(data)
@@ -113,9 +115,9 @@ export default {
     },
     async sendForm(event) {
       //reset submit
-      this.submitBtn.classList.add("loading");
-      this.submitTxt.classList.remove("error");
-      this.submitTxt.classList.remove("valid");
+      // this.submitBtn.classList.add("loading");
+      // this.submitTxt.classList.remove("error");
+      // this.submitTxt.classList.remove("valid");
 
       //send form to validation
       const query = await fetch("/", {
