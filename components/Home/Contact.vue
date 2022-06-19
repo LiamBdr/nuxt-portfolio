@@ -104,10 +104,10 @@ export default {
   data() {
     return {
       form: {
-        firstname: "liam",
-        lastname: "boudraa",
-        email: "liam.boudraa@gmail.com",
-        message: "hey bg",
+        firstname: "",
+        lastname: "",
+        email: "",
+        message: "",
       },
     };
   },
