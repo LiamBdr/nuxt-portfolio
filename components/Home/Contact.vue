@@ -104,12 +104,20 @@ export default {
   data() {
     return {
       form: {
-        firstname: "",
-        lastname: "",
-        email: "",
-        message: "",
+        firstname: "liam",
+        lastname: "boudraa",
+        email: "liam.boudraa@gmail.com",
+        message: "hey bg",
       },
     };
+  },
+  computed: {
+    submitBtn: () => {
+      return document.querySelector(".contact-submit");
+    },
+    submitTxt: () => {
+      return document.querySelector(".contact-validation");
+    },
   },
   methods: {
     encode(data) {
@@ -120,15 +128,31 @@ export default {
         .join("&");
     },
     sendForm(event) {
-      console.log("sending form");
+      event.preventDefault();
+      //reset submit
+      this.submitBtn.classList.add("loading");
+      this.submitTxt.classList.remove("error");
+      this.submitTxt.classList.remove("valid");
+      this.submitTxt.innerHTML = "";
 
-      console.warn(
-        this.encode({
-          "form-name": "contact-form",
-          "g-recaptcha-response": event.target["g-recaptcha-response"].value,
-          ...this.form,
-        })
-      );
+      if (
+        this.form.firstname === "" ||
+        this.form.lastname === "" ||
+        this.form.email === "" ||
+        this.form.message === ""
+      ) {
+        this.submitBtn.classList.remove("loading");
+        this.submitTxt.classList.add("error");
+        this.submitTxt.innerHTML = "Veuillez remplir l'ensemble des champs";
+        return;
+      }
+
+      if (event.target["g-recaptcha-response"].value === "") {
+        this.submitBtn.classList.remove("loading");
+        this.submitTxt.classList.add("error");
+        this.submitTxt.innerHTML = "Veuillez cocher le recaptcha";
+        return;
+      }
 
       fetch("/", {
         method: "POST",
@@ -138,9 +162,29 @@ export default {
           "g-recaptcha-response": event.target["g-recaptcha-response"].value,
           ...this.form,
         }),
-      })
-        .then(() => console.log("form sent"))
-        .catch((error) => alert(error));
+      }).then(
+        setTimeout(() => {
+          this.submitBtn.classList.remove("loading");
+          this.submitTxt.classList.add("valid");
+          this.submitTxt.innerHTML = "Votre mail a bien été envoyé !";
+
+          const inputs = document.querySelectorAll("input");
+          inputs.forEach((element) => {
+            element.value = "";
+          });
+          document.querySelector("textarea").value = "";
+
+          //reset after 2s
+          setTimeout(() => {
+            //reset form infos
+            this.submitTxt.classList.remove("valid");
+            this.form.firstname = "";
+            this.form.lastname = "";
+            this.form.email = "";
+            this.form.message = "";
+          }, 4000);
+        }, 1000)
+      );
     },
   },
 };
