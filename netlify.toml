@@ -1,0 +1,5 @@
+[[redirects]]
+    from = "/*"
+    to = "https://liamboudraa.fr/"
+    status = 301
+    force = true
